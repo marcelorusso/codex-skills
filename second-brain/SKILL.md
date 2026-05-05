@@ -36,6 +36,28 @@ Before substantive work, determine the repository mode from Git remotes and loca
 
 Repository `AGENTS.md` instructions may restate or refine this rule; follow them for that repository.
 
+## Natural Startup Command
+
+When the user asks `iniciar segundo cérebro`, `inicie o segundo cérebro`, `start second brain`, or an equivalent direct startup request:
+
+1. Resolve the active brain root using the core rule above.
+2. Determine whether the repository is a template or daily-use from Git remotes and local instructions.
+3. In daily-use repositories, run:
+
+```powershell
+<brain-root>\tools\memory.ps1 start-sync
+```
+
+4. Then run:
+
+```powershell
+<brain-root>\tools\memory.ps1 github-readiness
+<brain-root>\tools\memory.ps1 doctor
+```
+
+5. In template repositories, do not run operational `start-sync`; run `github-readiness` and `doctor` only.
+6. Summarize blockers and next authorized actions. Ask before installing packages, generating or storing keys, changing Git config, writing user-profile files, or saving secrets.
+
 ## MCP Surface
 
 Available MCP tools may vary by installed version. Common tools include:

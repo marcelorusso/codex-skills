@@ -4,7 +4,7 @@ Reusable Codex skills maintained as portable folders. Each skill lives in its ow
 
 ## Available Skills
 
-- `second-brain`: use a Markdown second-brain repository as persistent, auditable memory for Codex, including search, MCP/CLI workflows, bootstrap, governance, sync, privacy, and encryption guidance.
+- `second-brain`: use a Markdown second-brain repository as persistent, auditable memory for Codex, including search, MCP/CLI workflows, bootstrap, governance, sync, privacy, encryption guidance, and the natural startup request `iniciar segundo cérebro`.
 
 ## Install A Skill
 
