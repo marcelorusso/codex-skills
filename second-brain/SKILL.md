@@ -95,7 +95,12 @@ Mutating CLI/MCP operations auto-rebuild `.index/memory.db`. Embeddings are expl
 
 ## Writing Workflow
 
-Write durable memory only for:
+### Autonomous Memory Writes
+
+Codex may write to the resolved second-brain without asking when the content is durable, useful beyond the current conversation, and non-secret.
+Treat this as bounded autonomy: write useful memory proactively, but ask before storing secrets, sensitive personal information, large imported content, external embeddings over private or sensitive notes, or direct edits to `people/` and `projects/` entries unless the user clearly requested them.
+
+Write durable memory for:
 
 - decisions and rationale
 - stable preferences
