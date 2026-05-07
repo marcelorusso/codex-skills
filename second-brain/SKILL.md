@@ -36,6 +36,28 @@ Before substantive work, determine the repository mode from Git remotes and loca
 
 Repository `AGENTS.md` instructions may restate or refine this rule; follow them for that repository.
 
+## Natural Startup Command
+
+When the user asks `iniciar segundo cérebro`, `inicie o segundo cérebro`, `start second brain`, or an equivalent direct startup request:
+
+1. Resolve the active brain root using the core rule above.
+2. Determine whether the repository is a template or daily-use from Git remotes and local instructions.
+3. In daily-use repositories, run:
+
+```powershell
+<brain-root>\tools\memory.ps1 start-sync
+```
+
+4. Then run:
+
+```powershell
+<brain-root>\tools\memory.ps1 github-readiness
+<brain-root>\tools\memory.ps1 doctor
+```
+
+5. In template repositories, do not run operational `start-sync`; run `github-readiness` and `doctor` only.
+6. Summarize blockers and next authorized actions. Ask before installing packages, generating or storing keys, changing Git config, writing user-profile files, or saving secrets.
+
 ## MCP Surface
 
 Available MCP tools may vary by installed version. Common tools include:
@@ -47,11 +69,33 @@ Available MCP tools may vary by installed version. Common tools include:
 - `memory_reindex`, `memory_embed`
 - `memory_doctor`, `memory_review`, `memory_synthesize`, `memory_task_brief`
 - `memory_sync_check`, `memory_encrypt`, `memory_decrypt`, `memory_encrypt_protected`
-- `memory_bootstrap`, when exposed by the server
+- `memory_bootstrap`, `memory_start_sync`, `memory_device_key_status`, `memory_github_readiness`, when exposed by the server
 
 Encrypted bodies are redacted by default. Request decrypted content only when necessary for the user request and appropriate for the storage/security context.
 
 If MCP returns transport errors, fall back to CLI/direct reads. A previously loaded MCP host can remain stale until Codex is restarted even when the standalone server is fixed.
+
+## MCP Registration And Validation
+
+The MCP server is normally registered as `second-brain` and launched with:
+
+```powershell
+python <brain-root>\tools\second_brain_mcp.py
+```
+
+To validate whether Codex has it registered, run:
+
+```powershell
+codex mcp list
+```
+
+If no server is configured, register it:
+
+```powershell
+codex mcp add second-brain -- python "<brain-root>\tools\second_brain_mcp.py"
+```
+
+Codex may need to be restarted before a newly registered MCP server appears in the native tool list. If the current session reports `unknown MCP server 'second-brain'`, validate the standalone server or CLI, then tell the user to restart Codex before marking native MCP exposure complete.
 
 ## CLI Pattern
 
@@ -155,13 +199,7 @@ Use `task-brief`/`memory_task_brief` for delegation memory with owner/status, ex
 
 Expected directories include `inbox`, `notes`, `projects`, `decisions`, `people`, `references`, `summaries`, `tasks`, `schemas`, `tools`, `.index`, and `.trash`.
 
-The MCP server is normally registered as `second-brain` and launched with:
-
-```powershell
-python <brain-root>\tools\second_brain_mcp.py
-```
-
-On MCP `initialize`, daily-use repositories may run bootstrap checks and record/update `projects/daily-use-bootstrap-status.md`. Template repositories expose and store the bootstrap flow without treating daily setup as required.
+On MCP `initialize`, daily-use repositories may run bootstrap checks and record/update `references/daily-use-bootstrap-status.md`. Template repositories expose and store the bootstrap flow without treating daily setup as required.
 
 Use `install-git-hooks` for repository hooks and `install-agents` to install or refresh a managed global `AGENTS.md` block from `codex/AGENTS.global.md`. Ask before writing user-profile paths when approval is required.
 
